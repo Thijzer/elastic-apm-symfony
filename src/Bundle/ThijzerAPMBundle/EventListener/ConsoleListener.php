@@ -91,16 +91,25 @@ class ConsoleListener
                 $properties[$key] = $value;
             }
 
+            $startTime = $_SERVER['REQUEST_TIME'] ?? false;
+            $duration = 0;
             $measurements = [];
             if ($this->stopwatch->isStarted(self::WATCH_NAME)) {
                 $profile = $this->stopwatch->stop(self::WATCH_NAME);
+                $duration = $profile->getDuration();
                 $measurements = [
                     'Memory Usage' => $profile->getMemory(),
                     'Execution Duration' => $profile->getDuration(),
                 ];
             }
 
-            $this->tracker->trackEvent('Symfony Command Execution', $properties, $measurements);
+            $this->tracker->trackEvent(
+                'Symfony Command : '.$properties['Symfony Command Name'],
+                $startTime,
+                $duration,
+                $properties,
+                $measurements
+            );
         }
 
         // Send any pending telemetry

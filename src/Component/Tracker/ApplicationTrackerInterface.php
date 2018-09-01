@@ -54,7 +54,13 @@ interface ApplicationTrackerInterface
      *
      * @return self
      */
-    public function trackEvent(string $name, array $properties = [], array $measurements = []);
+    public function trackEvent(
+        string $name,
+        int $startTime,
+        int $duration,
+        array $properties = [],
+        array $measurements = []
+    );
 
     /**
      * Tracks a metric.

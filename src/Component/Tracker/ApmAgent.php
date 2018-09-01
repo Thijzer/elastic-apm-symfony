@@ -61,9 +61,25 @@ class ApmAgent implements ApplicationTrackerInterface
     /**
      * @inheritdoc
      */
-    public function trackEvent(string $name, array $properties = [], array $measurements = [])
-    {
-        // TODO: Implement trackEvent() method.
+    public function trackEvent(
+        string $name,
+        int $startTime,
+        int $duration,
+        array $properties = [],
+        array $measurements = []
+    ) {
+        $this->transaction->setTransactionName($name);
+
+        $this->transaction->setSpans([
+            'name' => 'Symfony Event',
+            'type' => 'symfony.app.event',
+            'start' => $startTime,
+            'duration' => $duration,
+            'properties' => $properties,
+            'measurements' => $measurements,
+        ]);
+
+        $this->transaction->stop($duration);
     }
 
     /**
@@ -111,6 +127,8 @@ class ApmAgent implements ApplicationTrackerInterface
             'properties' => $properties,
             'measurements' => $measurements,
         ]);
+
+        $this->agent->captureThrowable($exception);
     }
 
     /**

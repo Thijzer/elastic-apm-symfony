@@ -13,7 +13,10 @@ parameters:
 services:
   PhilKra\Agent:
     class: 'PhilKra\Agent'
-    arguments: [[ 'appName' => '%elastic-apm.appName%' ]]
+    arguments:
+      - appName: '%elastic-apm.appName%'
+        secretToken: null
+        serverUrl: 'http://127.0.0.1:8200'
 
   Thijzer\Component\Tracker\ApmAgent:
     class: 'Thijzer\Component\Tracker\ApmAgent.class'
@@ -23,32 +26,32 @@ services:
     class: '%Thijzer\Bundle\ThijzerAPMBundle\EventListener\KernelListener.class%'
     arguments: ['@kernel', '@Thijzer\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
-      -  name: kernel.event_listener
-         event: kernel.exception
-         method: onKernelException
+      -  name: 'kernel.event_listener'
+         event: 'kernel.exception'
+         method: 'onKernelException'
          priority: 0
-      -  name: kernel.event_listener
-         event: kernel.request
-         method: onKernelRequest
+      -  name: 'kernel.event_listener'
+         event: 'kernel.request'
+         method: 'onKernelRequest'
          priority: 0
-      -  name: kernel.event_listener
-         event: kernel.terminate
-         method: onKernelTerminate
+      -  name: 'kernel.event_listener'
+         event: 'kernel.terminate'
+         method: 'onKernelTerminate'
          priority: 0
 
   Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener:
     class: '%Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener.class%'
     arguments: ['@kernel', '@Thijzer\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
-      -  name: kernel.event_listener
-         event: console.command
-         method: onConsoleCommand
+      -  name: 'kernel.event_listener'
+         event: 'console.command'
+         method: 'onConsoleCommand'
          priority: 0
-      -  name: kernel.event_listener
-         event: console.exception
-         method: onConsoleException
+      -  name: 'kernel.event_listener'
+         event: 'console.exception'
+         method: 'onConsoleException'
          priority: 0
-      -  name: kernel.event_listener
-         event: console.terminate
-         method: onConsoleTerminate
+      -  name: 'kernel.event_listener'
+         event: 'console.terminate'
+         method: 'onConsoleTerminate'
          priority: 0
