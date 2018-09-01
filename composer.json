@@ -1,0 +1,32 @@
+{
+    "name": "thijzer/elastic-apm-symfony",
+    "keywords": [
+        "symfony",
+        "elastic",
+        "APM",
+        "monitoring",
+        "debug"
+    ],
+    "description": "A package to integrate Elastic APM into Symfony",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Thijs De Paepe",
+        "email": "Thijs.dp@gmail.com"
+    }],
+    "require": {
+        "php": ">=7.1",
+        "ramsey/uuid": "^3.0",
+        "symfony/framework-bundle": ">=3.4|^4.0",
+        "philkra/elastic-apm-php-agent": "^6.3",
+        "symfony/stopwatch": "^4.1",
+        "symfony/console": "^3.4|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thijzer\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

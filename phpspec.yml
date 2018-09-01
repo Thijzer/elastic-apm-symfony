@@ -1,0 +1,8 @@
+suites:
+  main:
+    namespace: Phpro
+    psr4_prefix: Phpro
+    src_path: "%paths.config%/src"
+    spec_path: "%paths.config%/tests"
+
+formatter.name: pretty
