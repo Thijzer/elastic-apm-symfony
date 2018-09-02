@@ -118,8 +118,7 @@ class ApmAgent implements ApplicationTrackerInterface
         int $resultCode = null,
         bool $isAsync = null,
         array $properties = []
-    )
-    {
+    ) {
         // TODO: Implement trackDependency() method.
     }
 

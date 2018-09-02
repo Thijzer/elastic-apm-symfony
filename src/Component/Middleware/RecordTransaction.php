@@ -20,16 +20,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RecordTransaction
 {
+    // /**
+    //  * @var Agent
+    //  */
+    // private $apmAgent;
+
+    // public function __construct(Agent $apmAgent)
+    // {
+    //     $this->apmAgent = $apmAgent;
+    // }
+
     /**
-     * @var Agent
+     * @TODO we need keep this as example up until we don't need it any more
      */
-    private $apmAgent;
-
-    public function __construct(Agent $apmAgent)
-    {
-        $this->apmAgent = $apmAgent;
-    }
-
     public function handle(Request $request, Closure $next)
     {
         $transaction = $this->apmAgent->startTransaction(Uuid::uuid4()->toString());
@@ -73,37 +76,37 @@ class RecordTransaction
         return $response;
     }
 
-    public function terminate(Request $request, Response $response)
-    {
-        $this->apmAgent->send();
-    }
+    // public function terminate(Request $request, Response $response)
+    // {
+    //     $this->apmAgent->send();
+    // }
 
-    protected function getTransactionName(Route $route)
-    {
-        // fix leading /
-        if ('/' !== $route->uri) {
-            $route->uri = '/'.$route->uri;
-        }
+    // protected function getTransactionName(Route $route)
+    // {
+    //     // fix leading /
+    //     if ('/' !== $route->uri) {
+    //         $route->uri = '/'.$route->uri;
+    //     }
 
-        return sprintf(
-            '%s %s',
-            head($route->methods),
-            $route->uri
-        );
-    }
+    //     return sprintf(
+    //         '%s %s',
+    //         head($route->methods),
+    //         $route->uri
+    //     );
+    // }
 
-    protected function getDuration($start): float
-    {
-        $diff = microtime(true) - $start;
-        $corrected = $diff * 1000; // convert to miliseconds
+    // protected function getDuration($start): float
+    // {
+    //     $diff = microtime(true) - $start;
+    //     $corrected = $diff * 1000; // convert to miliseconds
 
-        return round($corrected, 3);
-    }
+    //     return round($corrected, 3);
+    // }
 
-    protected function formatHeaders(array $headers): array
-    {
-        return collect($headers)->map(function ($values, $header) {
-            return head($values);
-        })->toArray();
-    }
+    // protected function formatHeaders(array $headers): array
+    // {
+    //     return collect($headers)->map(function ($values, $header) {
+    //         return head($values);
+    //     })->toArray();
+    // }
 }
