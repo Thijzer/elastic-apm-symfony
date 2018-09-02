@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener;
+namespace ElasticAPM\Bundle\ElasticAPMBundle\EventListener;
 
 use ElasticAPM\Component\Tracker\ApplicationTrackerInterface;
 use Symfony\Component\HttpFoundation\Request;

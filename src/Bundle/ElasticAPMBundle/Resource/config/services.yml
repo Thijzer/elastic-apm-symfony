@@ -1,7 +1,7 @@
 parameters:
-  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener.class: 'ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener'
-  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener.class: 'ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener'
-  ElasticAPM\Component\Tracker\ApmAgent.class: '\ElasticAPM\Component\Tracker\ApmAgent'
+  ElasticAPM\Bundle\ElasticAPMBundle\EventListener\ConsoleListener.class: 'ElasticAPM\Bundle\ElasticAPMBundle\EventListener\ConsoleListener'
+  ElasticAPM\Bundle\ElasticAPMBundle\EventListener\KernelListener.class: 'ElasticAPM\Bundle\ElasticAPMBundle\EventListener\KernelListener'
+  ElasticAPM\Component\Tracker\ApmAgent.class: 'ElasticAPM\Component\Tracker\ApmAgent'
   elastic-apm:
     appName: 'elastic-apm-test'
     listener:
@@ -22,8 +22,8 @@ services:
     class: 'ElasticAPM\Component\Tracker\ApmAgent.class'
     arguments: ['@PhilKra\Agent']
 
-  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener:
-    class: '%ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener.class%'
+  ElasticAPM\Bundle\ElasticAPMBundle\EventListener\KernelListener:
+    class: '%ElasticAPM\Bundle\ElasticAPMBundle\EventListener\KernelListener.class%'
     arguments: ['@kernel', '@ElasticAPM\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
       -  name: 'kernel.event_listener'
@@ -39,8 +39,8 @@ services:
          method: 'onKernelTerminate'
          priority: 0
 
-  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener:
-    class: '%ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener.class%'
+  ElasticAPM\Bundle\ElasticAPMBundle\EventListener\ConsoleListener:
+    class: '%ElasticAPM\Bundle\ElasticAPMBundle\EventListener\ConsoleListener.class%'
     arguments: ['@kernel', '@ElasticAPM\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
       -  name: 'kernel.event_listener'
