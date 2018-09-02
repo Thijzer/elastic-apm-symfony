@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Thijzer\Bundle\ThijzerAPMBundle\EventListener;
+namespace ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener;
 
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Thijzer\Component\Tracker\ApplicationTrackerInterface;
+use ElasticAPM\Component\Tracker\ApplicationTrackerInterface;
 
 class ConsoleListener
 {
@@ -99,12 +99,12 @@ class ConsoleListener
                 $duration = $profile->getDuration();
                 $measurements = [
                     'Memory Usage' => $profile->getMemory(),
-                    'Execution Duration' => $profile->getDuration(),
+                    'Execution Duration' => $duration,
                 ];
             }
 
-            $this->tracker->trackEvent(
-                'Symfony Command : '.$properties['Symfony Command Name'],
+            $this->tracker->trackConsoleCommand(
+                $properties['Symfony Command Name'],
                 $startTime,
                 $duration,
                 $properties,

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Thijzer\Component\Tracker;
+namespace ElasticAPM\Component\Tracker;
 
 use PhilKra\Agent;
 use Ramsey\Uuid\Uuid;
@@ -55,13 +55,12 @@ class ApmAgent implements ApplicationTrackerInterface
         ]);
 
         $this->transaction->stop($duration);
-
     }
 
     /**
      * @inheritdoc
      */
-    public function trackEvent(
+    public function trackConsoleCommand(
         string $name,
         int $startTime,
         int $duration,
@@ -80,6 +79,14 @@ class ApmAgent implements ApplicationTrackerInterface
         ]);
 
         $this->transaction->stop($duration);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function trackEvent(string $name, array $properties = [], array $measurements = [])
+    {
+        // TODO: Implement trackEvent() method.
     }
 
     /**

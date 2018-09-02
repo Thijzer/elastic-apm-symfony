@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Thijzer\Component\Tracker;
+namespace ElasticAPM\Component\Tracker;
 
 interface ApplicationTrackerInterface
 {
@@ -46,6 +46,25 @@ interface ApplicationTrackerInterface
     );
 
     /**
+     * Tracks a console command.
+     *
+     * @param string $name         the command name
+     * @param int    $startTime    the timestamp at which the command started
+     * @param int    $duration     the duration, in milliseconds
+     * @param array  $properties   an array of name to value pairs
+     * @param array  $measurements an array of name to double pairs
+     *
+     * @return self
+     */
+    public function trackConsoleCommand(
+        string $name,
+        int $startTime,
+        int $duration,
+        array $properties = [],
+        array $measurements = []
+    );
+
+    /**
      * Tracks an event.
      *
      * @param string $name
@@ -56,8 +75,6 @@ interface ApplicationTrackerInterface
      */
     public function trackEvent(
         string $name,
-        int $startTime,
-        int $duration,
         array $properties = [],
         array $measurements = []
     );

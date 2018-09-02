@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Thijzer\Component\Middleware;
+namespace ElasticAPM\Component\Middleware;
 
 use Closure;
 use Illuminate\Routing\Route;

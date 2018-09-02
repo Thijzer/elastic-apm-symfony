@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Thijzer\Bundle\ThijzerAPMBundle\EventListener;
+namespace ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener;
 
+use ElasticAPM\Component\Tracker\ApplicationTrackerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -19,7 +20,6 @@ use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Thijzer\Component\Tracker\ApplicationTrackerInterface;
 
 /**
  * Attaching actions to kernel events.

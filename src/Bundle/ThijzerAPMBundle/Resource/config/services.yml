@@ -1,7 +1,7 @@
 parameters:
-  Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener.class: 'Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener'
-  Thijzer\Bundle\ThijzerAPMBundle\EventListener\KernelListener.class: 'Thijzer\Bundle\ThijzerAPMBundle\EventListener\KernelListener'
-  Thijzer\Component\Tracker\ApmAgent.class: '\Thijzer\Component\Tracker\ApmAgent'
+  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener.class: 'ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener'
+  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener.class: 'ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener'
+  ElasticAPM\Component\Tracker\ApmAgent.class: '\ElasticAPM\Component\Tracker\ApmAgent'
   elastic-apm:
     appName: 'elastic-apm-test'
     listener:
@@ -18,13 +18,13 @@ services:
         secretToken: null
         serverUrl: 'http://127.0.0.1:8200'
 
-  Thijzer\Component\Tracker\ApmAgent:
-    class: 'Thijzer\Component\Tracker\ApmAgent.class'
+  ElasticAPM\Component\Tracker\ApmAgent:
+    class: 'ElasticAPM\Component\Tracker\ApmAgent.class'
     arguments: ['@PhilKra\Agent']
 
-  Thijzer\Bundle\ThijzerAPMBundle\EventListener\KernelListener:
-    class: '%Thijzer\Bundle\ThijzerAPMBundle\EventListener\KernelListener.class%'
-    arguments: ['@kernel', '@Thijzer\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
+  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener:
+    class: '%ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\KernelListener.class%'
+    arguments: ['@kernel', '@ElasticAPM\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
       -  name: 'kernel.event_listener'
          event: 'kernel.exception'
@@ -39,9 +39,9 @@ services:
          method: 'onKernelTerminate'
          priority: 0
 
-  Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener:
-    class: '%Thijzer\Bundle\ThijzerAPMBundle\EventListener\ConsoleListener.class%'
-    arguments: ['@kernel', '@Thijzer\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
+  ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener:
+    class: '%ElasticAPM\Bundle\ElasticAPMAPMBundle\EventListener\ConsoleListener.class%'
+    arguments: ['@kernel', '@ElasticAPM\Component\Tracker\ApmAgent', '%elastic-apm.listener.rules%']
     tags:
       -  name: 'kernel.event_listener'
          event: 'console.command'
